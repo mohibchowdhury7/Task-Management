@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="top-input-header">
+    <div class="title">
+      <h2>{{name ? 'Edit' : 'Add New'}} Brand</h2>
+    </div>
+  </div>
+
+
+  <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+
+    <div class="form-input">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput placeholder="Enter full name" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-input">
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea formControlName="description" matInput placeholder="Enter description" [rows]="2" required></textarea>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-input">
+      <mat-radio-group formControlName="priority">
+        <mat-radio-button value="Low">Low</mat-radio-button>
+        <mat-radio-button value="Medium">Medium</mat-radio-button>
+        <mat-radio-button value="High">High</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="form-input">
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="startDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-input">
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="endDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-input">
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="to-do">To-do</mat-option>
+          <mat-option value="in-progress">In progress</mat-option>
+          <mat-option value="done">Done</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-input">
+      <mat-form-field appearance="outline">
+        <mat-label>Persons</mat-label>
+        <mat-select formControlName="person">
+          <mat-option *ngFor="let data of persons" [value]="data">{{data}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-input">
+
+      <div formArrayName="subTasks" class="form-array-input">
+        <div class="single-field"
+             *ngFor="let data of subTasksArray?.controls; let i = index"
+             [formGroupName]="i">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input formControlName="title"
+                   type="text"
+                   matInput [placeholder]="'Enter title'">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <input formControlName="description"
+                   type="text"
+                   matInput [placeholder]="'Enter description'">
+          </mat-form-field>
+
+          <button class="btn-form-field-remove" type="button" mat-mini-fab color="warn"
+                  (click)="removeFormArrayField('subTasks', i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="add-form-array-action">
+        <button type="button" mat-raised-button color="primary">
+          <mat-icon  (click)="onAddNewSubTasks()">add</mat-icon>
+        </button>
+      </div>
+
+    </div>
+
+    <button mat-raised-button color="primary"
+      type="submit">
+      {{name ? 'Update Blog' : 'Add Blog'}}
+    </button>
+
+  </form>
+
+</div>

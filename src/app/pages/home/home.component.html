@@ -1,0 +1,45 @@
+<div class="main_content_area">
+  <div class="container">
+    <div class="add_task_button">
+      <button mat-raised-button color="primary" routerLink="/add-task">Add Task</button>
+    </div>
+
+   <div class="tasks-type">
+    <div class="main-card">
+      <div class="card-title">
+        <h2>To-do</h2>
+      </div>
+
+      <div class="card-description">
+        <div class="single-task" *ngFor="let data of toDoTasks"  (click)="openTaskDetailsDialog(data)">
+          <h3>{{data?.title}}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-card">
+      <div class="card-title">
+        <h2>In-Progress</h2>
+      </div>
+
+      <div class="card-description">
+        <div class="single-task" *ngFor="let data of inProgressTasks">
+          <h3>{{data?.title}}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-card">
+      <div class="card-title">
+        <h2>Done</h2>
+      </div>
+
+      <div class="card-description">
+        <div class="single-task" *ngFor="let data of doneTasks">
+          <h3>{{data?.title}}</h3>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+</div>

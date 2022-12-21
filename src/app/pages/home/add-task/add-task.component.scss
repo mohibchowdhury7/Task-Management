@@ -1,0 +1,16 @@
+
+.container{
+  width: 100%;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+}
+
+::ng-deep mat-form-field{
+  width: 300px;
+  margin: auto;
+}
